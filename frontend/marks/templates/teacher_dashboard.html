@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block title %}Teacher Dashboard - Student Marks Analyzer{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="user-info">
+        <h2>Teacher Dashboard</h2>
+        <div id="teacher-details">
+            <p><strong>Name:</strong> <span id="teacher-name"></span></p>
+            <p><strong>SAP ID:</strong> <span id="teacher-sapid"></span></p>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="subjects">Subjects</button>
+        <button class="tab-btn" data-tab="tests">Tests</button>
+        <button class="tab-btn" data-tab="scores">Scores</button>
+    </div>
+
+    <div class="tab-content" id="subjects-tab">
+        <h3>Subjects</h3>
+        <button id="add-subject-btn" class="btn">Add New Subject</button>
+        <div id="subjects-list" class="data-list">
+            <div class="loading">Loading...</div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="tests-tab" style="display: none;">
+        <h3>Tests</h3>
+        <button id="add-test-btn" class="btn">Add New Test</button>
+        <div class="filter-container">
+            <label for="subject-filter">Filter by Subject:</label>
+            <select id="subject-filter">
+                <option value="">All Subjects</option>
+            </select>
+        </div>
+        <div id="tests-list" class="data-list">
+            <div class="loading">Loading...</div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="scores-tab" style="display: none;">
+        <h3>Scores</h3>
+        <button id="add-score-btn" class="btn">Add New Score</button>
+        <div class="filter-container">
+            <label for="test-filter">Filter by Test:</label>
+            <select id="test-filter">
+                <option value="">All Tests</option>
+            </select>
+        </div>
+        <div id="scores-list" class="data-list">
+            <div class="loading">Loading...</div>
+        </div>
+    </div>
+
+    <!-- Modal for adding/editing subjects -->
+    <div id="subject-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="subject-modal-title">Add Subject</h3>
+            <form id="subject-form">
+                <input type="hidden" id="subject-id">
+                <div class="form-group">
+                    <label for="subject-name">Subject Name:</label>
+                    <input type="text" id="subject-name" required>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for adding/editing tests -->
+    <div id="test-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="test-modal-title">Add Test</h3>
+            <form id="test-form">
+                <input type="hidden" id="test-id">
+                <div class="form-group">
+                    <label for="test-name">Test Name:</label>
+                    <input type="text" id="test-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="test-subject">Subject:</label>
+                    <select id="test-subject" required>
+                        <option value="">Select Subject</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="test-max-marks">Maximum Marks:</label>
+                    <input type="number" id="test-max-marks" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="test-class">Class:</label>
+                    <input type="text" id="test-class" required>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for adding/editing scores -->
+    <div id="score-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="score-modal-title">Add Score</h3>
+            <form id="score-form">
+                <input type="hidden" id="score-id">
+                <div class="form-group">
+                    <label for="score-test">Test:</label>
+                    <select id="score-test" required>
+                        <option value="">Select Test</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="score-student">Student:</label>
+                    <select id="score-student" required>
+                        <option value="">Select Student</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="score-value">Score:</label>
+                    <input type="number" id="score-value" min="0" step="0.01" required>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for viewing test statistics -->
+    <div id="stats-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Test Statistics</h3>
+            <div id="test-stats-container">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/teacher.js"></script>
+{% endblock %}

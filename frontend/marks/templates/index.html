@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Student Marks Analyzer{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="student">Student Login</button>
+        <button class="tab-btn" data-tab="teacher">Teacher Login</button>
+    </div>
+
+    <div class="tab-content" id="student-tab">
+        <h2>Student Login</h2>
+        <form id="student-login-form">
+            <div class="form-group">
+                <label for="student-sapid">SAP ID:</label>
+                <input type="text" id="student-sapid" name="sapid" required>
+            </div>
+            <div class="form-group">
+                <label for="student-password">Password:</label>
+                <input type="password" id="student-password" name="password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div id="student-login-error" class="error-message"></div>
+    </div>
+
+    <div class="tab-content" id="teacher-tab" style="display: none;">
+        <h2>Teacher Login</h2>
+        <form id="teacher-login-form">
+            <div class="form-group">
+                <label for="teacher-sapid">SAP ID:</label>
+                <input type="text" id="teacher-sapid" name="sapid" required>
+            </div>
+            <div class="form-group">
+                <label for="teacher-password">Password:</label>
+                <input type="password" id="teacher-password" name="password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div id="teacher-login-error" class="error-message"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/login.js"></script>
+{% endblock %}

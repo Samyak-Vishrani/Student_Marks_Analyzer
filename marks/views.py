@@ -12,6 +12,18 @@ from .serializers import (
     StudentResultSerializer
 )
 
+from django.shortcuts import render
+
+# Frontend views
+def index(request):
+    return render(request, 'index.html')
+
+def student_dashboard(request):
+    return render(request, 'student_dashboard.html')
+
+def teacher_dashboard(request):
+    return render(request, 'teacher_dashboard.html')
+
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer

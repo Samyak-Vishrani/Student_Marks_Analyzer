@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student Marks Analyzer{% endblock %}</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Student Marks Analyzer</h1>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li id="logout-btn" style="display: none;"><a href="javascript:void(0);"
+                            onclick="logout()">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Student Marks Analyzer</p>
+        </div>
+    </footer>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('userType');
+            localStorage.removeItem('userData');
+            window.location.href = '/';
+        }
+
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function () {
+            const userData = localStorage.getItem('userData');
+            if (userData) {
+                document.getElementById('logout-btn').style.display = 'inline-block';
+            }
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

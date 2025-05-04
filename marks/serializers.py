@@ -30,10 +30,11 @@ class TestSerializer(serializers.ModelSerializer):
 class ScoreSerializer(serializers.ModelSerializer):
     student_name = serializers.SerializerMethodField()
     test_name = serializers.SerializerMethodField()
+    max_marks = serializers.SerializerMethodField()
     
     class Meta:
         model = Score
-        fields = ['id', 'test', 'student', 'score', 'is_pass', 'rank', 'student_name', 'test_name']
+        fields = ['id', 'test', 'student', 'score', 'is_pass', 'rank', 'student_name', 'test_name', 'max_marks']
         read_only_fields = ['is_pass', 'rank']
     
     def get_student_name(self, obj):
@@ -41,6 +42,9 @@ class ScoreSerializer(serializers.ModelSerializer):
     
     def get_test_name(self, obj):
         return obj.test.name
+    
+    def get_max_marks(self, obj):
+        return obj.test.max_marks
 
 class TestResultSerializer(serializers.ModelSerializer):
     scores = serializers.SerializerMethodField()
